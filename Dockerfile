@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM franela/dind:latest
 
 # Cài đặt ttyd và các dependencies khác
 RUN apk add --no-cache \
