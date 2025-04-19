@@ -1,8 +1,8 @@
-# Sử dụng image franela/dind làm base image
-FROM franela/dind:latest
+FROM alpine:latest
 
-# Cài đặt các dependencies cần thiết
+# Cài đặt ttyd và các dependencies khác
 RUN apk add --no-cache \
+    ttyd \
     bash \
     git \
     cmake \
@@ -11,20 +11,10 @@ RUN apk add --no-cache \
     curl \
     libwebsockets-dev \
     json-c-dev \
-    zlib-dev && \
-    rm -rf /var/cache/apk/*
+    zlib-dev
 
-# Cài đặt ttyd từ source
-RUN git clone https://github.com/tsl0922/ttyd.git /opt/ttyd && \
-    cd /opt/ttyd && \
-    mkdir build && \
-    cd build && \
-    cmake .. && \
-    make && \
-    make install
+# Mở cổng 8080
+EXPOSE 8080
 
-# Tạo user cho ttyd
-RUN useradd -ms /bin/bash myuser && echo 'myuser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
-# Cấu hình ttyd chạy trên port 8080
-CMD /usr/local/bin/ttyd -p 8080 -u myuser -g myuser bash
+# Khởi chạy ttyd trên cổng 8080
+CMD ["ttyd", "-p", "8080", "bash"]
