@@ -11,17 +11,17 @@ RUN apk add --no-cache \
     curl \
     libwebsockets-dev \
     json-c-dev \
-    zlib-dev \  # Thêm zlib-dev
-    && rm -rf /var/cache/apk/*
+    zlib-dev && \
+    rm -rf /var/cache/apk/*
 
 # Cài đặt ttyd từ source
-RUN git clone https://github.com/tsl0922/ttyd.git /opt/ttyd \
-    && cd /opt/ttyd \
-    && mkdir build \
-    && cd build \
-    && cmake .. \
-    && make \
-    && make install
+RUN git clone https://github.com/tsl0922/ttyd.git /opt/ttyd && \
+    cd /opt/ttyd && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make && \
+    make install
 
 # Tạo user cho ttyd
 RUN useradd -ms /bin/bash myuser && echo 'myuser ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
