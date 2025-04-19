@@ -17,4 +17,4 @@ RUN apk add --no-cache \
 EXPOSE 8080
 
 # Khởi chạy ttyd trên cổng 8080
-CMD ["ttyd", "-p", "8080", "bash"]
+CMD ["ttyd", "-W", "-p", "8080", "bash"]
