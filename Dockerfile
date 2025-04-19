@@ -11,6 +11,7 @@ RUN apk add --no-cache \
     curl \
     libwebsockets-dev \
     json-c-dev \
+    zlib-dev \  # Thêm zlib-dev
     && rm -rf /var/cache/apk/*
 
 # Cài đặt ttyd từ source
